@@ -1,0 +1,498 @@
+{console.log("Hello, World!");
+
+var oldStyle = "This is old way of creating variable in js";
+let a = 10;
+let b = 20;
+let c = a+b;
+let ok = true;
+let name = "BTI";
+var oldStyle = "Again assigning value";// recreating the value
+console.log(oldStyle);
+{
+let name = "BMW techworks";
+console.log(oldStyle,c,name);
+}
+}
+------------------------------------------------------------------------------------
+It sounds like you're learning JavaScript (var, let, null, Map, type casting with strings). Here's a single program that demonstrates all these concepts with explanations.
+
+1. var vs let and Block Scope
+console.log("=== var vs let ===");
+
+if (true) {
+    var a = 10;
+    let b = 20;
+
+    console.log("Inside block:");
+    console.log("a =", a);
+    console.log("b =", b);
+}
+
+console.log("Outside block:");
+console.log("a =", a); // Works
+
+// console.log("b =", b); // Error: b is not defined
+
+Explanation
+var is function-scoped, not block-scoped.
+let is block-scoped.
+Variables declared with let are accessible only inside {} where they are declared.
+2. Array Type and Internals
+console.log("\n=== Array Type ===");
+
+let arr = [10, 20, 30];
+
+console.log(arr);
+console.log(typeof arr);
+console.log(Array.isArray(arr));
+
+Output
+[10, 20, 30]
+object
+true
+
+Explanation
+
+Even though it's an array:
+
+typeof arr
+
+
+returns:
+
+object
+
+
+because arrays are internally specialized objects.
+
+3. Null
+console.log("\n=== Null ===");
+
+let value = null;
+
+console.log(value);
+console.log(typeof value);
+
+Output
+null
+object
+
+Explanation
+
+null represents an intentional absence of value.
+
+Interestingly:
+
+typeof null
+
+
+returns "object" due to a historical JavaScript bug that was never changed for compatibility reasons.
+
+4. Map
+console.log("\n=== Map ===");
+
+let student = new Map();
+
+student.set("id", 101);
+student.set("name", "Arul");
+student.set("city", "Bangalore");
+
+console.log(student);
+
+console.log(student.get("name"));
+console.log(student.has("city"));
+console.log(student.size);
+
+Output
+Arul
+true
+3
+
+Why Map?
+
+A Map:
+
+Stores key-value pairs.
+Keys can be any datatype.
+Maintains insertion order.
+let map = new Map();
+
+map.set(1, "Number Key");
+map.set(true, "Boolean Key");
+map.set({}, "Object Key");
+
+5. Type Casting Using String
+Number → String
+console.log("\n=== Number to String ===");
+
+let num = 100;
+
+let str1 = String(num);
+let str2 = num.toString();
+
+console.log(str1, typeof str1);
+console.log(str2, typeof str2);
+
+String → Number
+console.log("\n=== String to Number ===");
+
+let text = "150";
+
+let n1 = Number(text);
+let n2 = parseInt(text);
+
+console.log(n1, typeof n1);
+console.log(n2, typeof n2);
+
+How Type Casting Happens Internally
+Example 1
+let result = "10" + 5;
+console.log(result);
+
+
+Output:
+
+105
+
+
+Internal conversion:
+
+"10" + String(5)
+
+
+becomes:
+
+"10" + "5"
+
+
+Result:
+
+"105"
+
+Example 2
+let result = "10" - 5;
+console.log(result);
+
+
+Output:
+
+5
+
+
+Internal conversion:
+
+Number("10") - 5
+
+
+becomes:
+
+10 - 5
+
+
+Result:
+
+5
+
+Example 3
+console.log("5" * "2");
+
+
+Output:
+
+10
+
+
+Internally:
+
+Number("5") * Number("2")
+
+Complete Program
+console.log("===== VAR VS LET =====");
+
+if (true) {
+    var x = 100;
+    let y = 200;
+
+    console.log("Inside Block:");
+    console.log(x);
+    console.log(y);
+}
+
+console.log("Outside Block:");
+console.log(x);
+
+console.log("\n===== ARRAY =====");
+
+let arr = [1, 2, 3];
+console.log(arr);
+console.log(typeof arr);
+console.log(Array.isArray(arr));
+
+console.log("\n===== NULL =====");
+
+let data = null;
+console.log(data);
+console.log(typeof data);
+
+console.log("\n===== MAP =====");
+
+let map = new Map();
+map.set("name", "Arul");
+map.set("age", 25);
+
+console.log(map.get("name"));
+console.log(map.size);
+
+console.log("\n===== TYPE CASTING =====");
+
+let num = 100;
+let str = String(num);
+
+console.log(str, typeof str);
+
+let text = "500";
+let value = Number(text);
+
+console.log(value, typeof value);
+
+console.log("\nImplicit Conversion:");
+
+console.log("10" + 5); // 105
+console.log("10" - 5); // 5
+console.log("5" * "2"); // 10
+
+
+This program covers:
+
+✅ var vs let
+✅ Block scope
+✅ Array type (typeof behavior)
+✅ null
+✅ Map
+✅ Explicit type casting (String(), Number())
+✅ Implicit type conversion using strings internally.
+----------------------------------------------------------------------------------------------------------------
+In JavaScript, both == and === are used for comparison, but they behave differently.
+
+== (Loose Equality)
+Compares values after type conversion (coercion).
+JavaScript tries to convert operands to the same type before comparing.
+console.log(5 == "5");      // true
+console.log(true == 1);     // true
+console.log(false == 0);    // true
+console.log(null == undefined); // true
+
+Internal Conversion
+5 == "5"
+
+
+JavaScript converts "5" to number:
+
+5 == 5
+
+
+Result:
+
+true
+
+=== (Strict Equality)
+Compares value and datatype.
+No type conversion is performed.
+console.log(5 === "5");     // false
+console.log(true === 1);    // false
+console.log(false === 0);   // false
+console.log(5 === 5);       // true
+
+Example
+5 === "5"
+
+
+Types are:
+
+number === string
+
+
+Since types differ:
+
+false
+
+Examples
+console.log(10 == "10");   // true
+console.log(10 === "10");  // false
+
+console.log(true == 1);    // true
+console.log(true === 1);   // false
+
+console.log(null == undefined);   // true
+console.log(null === undefined);  // false
+
+Object Example
+let a = [1, 2];
+let b = [1, 2];
+let c = a;
+
+console.log(a == b);   // false
+console.log(a === b);  // false
+
+console.log(a == c);   // true
+console.log(a === c);  // true
+
+
+Arrays and objects are compared by reference, not by content.
+
+Interview-Friendly Summary
+==  → Compares only values after type coercion.
+=== → Compares both value and datatype without coercion.
+
+Best Practice
+
+✅ Prefer === and !== in modern JavaScript because they avoid unexpected type conversions.
+
+if (userId === 10) {
+    console.log("Valid User");
+}
+
+
+This makes your code more predictable and less error-prone.
+-------------------------------------------------------------------------------------------------------------
+
+Number() and parseInt() are both used to convert values to numbers, but they work differently.
+
+1. Number()
+
+Number() tries to convert the entire value into a valid number.
+
+console.log(Number("123"));      // 123
+console.log(Number("123.45"));   // 123.45
+console.log(Number("123abc"));   // NaN
+console.log(Number("abc"));      // NaN
+
+Rules
+Number("100")      // 100
+Number("100.5")    // 100.5
+Number("")         // 0
+Number(true)       // 1
+Number(false)      // 0
+Number(null)       // 0
+
+
+If any invalid character is present:
+
+Number("100px")    // NaN
+
+
+because the whole string is not a valid number.
+
+2. parseInt()
+
+parseInt() reads the string from left to right and extracts the integer part until it encounters an invalid character.
+
+console.log(parseInt("123"));      // 123
+console.log(parseInt("123abc"));   // 123
+console.log(parseInt("123.45"));   // 123
+console.log(parseInt("abc123"));   // NaN
+
+Rules
+parseInt("100px")   // 100
+parseInt("45.67")   // 45
+parseInt("010")     // 10
+
+
+It stops parsing when it finds a non-numeric character.
+
+Comparison Examples
+console.log(Number("100px"));    // NaN
+console.log(parseInt("100px"));  // 100
+
+console.log(Number("123.99"));   // 123.99
+console.log(parseInt("123.99")); // 123
+
+console.log(Number(""));         // 0
+console.log(parseInt(""));       // NaN
+
+Internal Behavior
+Number()
+Number("123abc")
+
+
+Internally checks:
+
+Is the entire string a valid number?
+
+
+Result:
+
+NaN
+
+parseInt()
+parseInt("123abc")
+
+
+Internally:
+
+1 → valid
+2 → valid
+3 → valid
+a → stop
+
+
+Result:
+
+123
+
+Interview Answer
+Number()
+- Converts the entire value to a number.
+- Returns NaN if any part is invalid.
+- Supports integers, decimals, booleans, null.
+
+parseInt()
+- Extracts and converts only the integer portion.
+- Stops at the first invalid character.
+- Useful when parsing values like "100px" or "45abc".
+
+Best Practice
+
+If you need strict numeric validation:
+
+let age = Number(input);
+
+
+If you need to extract an integer from a mixed string:
+
+let width = parseInt("250px");
+
+
+Output:
+
+width = 250
+------------------------------------------------------------------------------------------
+// let a = 12.343;
+// let b = 7;
+// let c = "10.673";
+// let d = "20";
+// let e = true;
+// let sum = a+b+Number(c)+Number(d)+Number(e);
+// console.log(sum.toFixed(2));
+// console.log(typeof sum);
+
+let result = (12.345).toFixed(2);
+
+console.log(result);        // "12.35"
+console.log(typeof result); // string
+
+-------------------------------------------------------------------------------------
+let a = 12.343;
+let b = 7;
+let c = "10.673";
+let d = "20";a
+let e = true;
+let sum = a+b+Number(c)+Number(d)+Number(e);
+console.log(sum.toFixed(2));
+console.log(typeof sum);
+
+let result = (12.345).toFixed(2);
+
+console.log(result);        
+console.log(typeof result); 
+---------------------------------------------------------------------------------------
